@@ -4,6 +4,7 @@ import { AuthProvider, useAuth } from './context/AuthContext';
 import Navbar from './components/ui/Navbar';
 import Home from './pages/Home';
 import Products from './pages/Products';
+import ProductDetail from './pages/ProductDetail';
 import Auth from './pages/Auth';
 import './App.css';
 
@@ -30,6 +31,7 @@ const AppLayout = () => {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/products" element={<Products />} />
+        <Route path="/product/:id" element={<ProductDetail />} />
         <Route path="/auth" element={<Auth />} />
         
         {/* Placeholder routes for future phases */}
@@ -53,15 +55,6 @@ const AppLayout = () => {
                 <p className="text-gray-600">Coming in Phase 6</p>
               </div>
             </ProtectedRoute>
-          } 
-        />
-        <Route 
-          path="/product/:id" 
-          element={
-            <div className="max-w-7xl mx-auto px-4 py-20 text-center">
-              <h1 className="text-3xl font-bold text-gray-900 mb-4">Product Details</h1>
-              <p className="text-gray-600">Coming in Phase 3</p>
-            </div>
           } 
         />
         
