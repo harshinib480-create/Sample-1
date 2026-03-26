@@ -6,6 +6,9 @@ import Home from './pages/Home';
 import Products from './pages/Products';
 import ProductDetail from './pages/ProductDetail';
 import Auth from './pages/Auth';
+import Cart from './pages/Cart';
+import Checkout from './pages/Checkout';
+import OrderSuccess from './pages/OrderSuccess';
 import VendorDashboard from './pages/VendorDashboard';
 import VendorProducts from './pages/VendorProducts';
 import VendorOrders from './pages/VendorOrders';
@@ -87,10 +90,23 @@ const AppLayout = () => {
           path="/cart" 
           element={
             <ProtectedRoute>
-              <div className="max-w-7xl mx-auto px-4 py-20 text-center">
-                <h1 className="text-3xl font-bold text-gray-900 mb-4">Cart</h1>
-                <p className="text-gray-600">Coming in Phase 5</p>
-              </div>
+              <Cart />
+            </ProtectedRoute>
+          } 
+        />
+        <Route 
+          path="/checkout" 
+          element={
+            <ProtectedRoute>
+              <Checkout />
+            </ProtectedRoute>
+          } 
+        />
+        <Route 
+          path="/order-success/:orderId" 
+          element={
+            <ProtectedRoute>
+              <OrderSuccess />
             </ProtectedRoute>
           } 
         />
