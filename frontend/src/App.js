@@ -6,6 +6,11 @@ import Home from './pages/Home';
 import Products from './pages/Products';
 import ProductDetail from './pages/ProductDetail';
 import Auth from './pages/Auth';
+import VendorDashboard from './pages/VendorDashboard';
+import VendorProducts from './pages/VendorProducts';
+import VendorOrders from './pages/VendorOrders';
+import VendorProductForm from './pages/VendorProductForm';
+import VendorSignup from './pages/VendorSignup';
 import './App.css';
 
 // Protected Route Component
@@ -33,6 +38,49 @@ const AppLayout = () => {
         <Route path="/products" element={<Products />} />
         <Route path="/product/:id" element={<ProductDetail />} />
         <Route path="/auth" element={<Auth />} />
+        
+        {/* Vendor Routes */}
+        <Route path="/vendor/signup" element={<VendorSignup />} />
+        <Route 
+          path="/vendor/dashboard" 
+          element={
+            <ProtectedRoute>
+              <VendorDashboard />
+            </ProtectedRoute>
+          } 
+        />
+        <Route 
+          path="/vendor/products" 
+          element={
+            <ProtectedRoute>
+              <VendorProducts />
+            </ProtectedRoute>
+          } 
+        />
+        <Route 
+          path="/vendor/products/new" 
+          element={
+            <ProtectedRoute>
+              <VendorProductForm />
+            </ProtectedRoute>
+          } 
+        />
+        <Route 
+          path="/vendor/products/edit/:id" 
+          element={
+            <ProtectedRoute>
+              <VendorProductForm />
+            </ProtectedRoute>
+          } 
+        />
+        <Route 
+          path="/vendor/orders" 
+          element={
+            <ProtectedRoute>
+              <VendorOrders />
+            </ProtectedRoute>
+          } 
+        />
         
         {/* Placeholder routes for future phases */}
         <Route 
