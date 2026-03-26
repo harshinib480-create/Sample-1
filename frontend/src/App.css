@@ -102,6 +102,22 @@ button {
   animation: spin 1s linear infinite;
 }
 
+/* Slide in animation for toast */
+@keyframes slide-in {
+  from {
+    transform: translateX(400px);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+.animate-slide-in {
+  animation: slide-in 0.3s ease-out;
+}
+
 /* Mobile tap highlight */
 * {
   -webkit-tap-highlight-color: rgba(22, 163, 74, 0.1);

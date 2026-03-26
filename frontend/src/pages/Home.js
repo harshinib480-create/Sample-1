@@ -58,7 +58,7 @@ const Home = () => {
               Build Your Dream Home
             </h1>
             <p className="text-xl sm:text-2xl mb-8 text-green-50">
-              Quality construction materials with sustainability insights
+              Premium materials. Verified vendors. Eco-friendly choices.
             </p>
             {!isAuthenticated && (
               <Link

@@ -24,6 +24,11 @@ const Cart = () => {
     try {
       const res = await cartAPI.get();
       setCart(res.data);
+      
+      // Refresh navbar cart count
+      if (window.refreshCartCount) {
+        window.refreshCartCount();
+      }
     } catch (error) {
       console.error('Error loading cart:', error);
     } finally {

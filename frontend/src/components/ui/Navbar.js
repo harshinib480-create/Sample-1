@@ -1,12 +1,33 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { Search, ShoppingCart, User, LogOut, Package, Home, Leaf } from 'lucide-react';
 import { useAuth } from '../../context/AuthContext';
+import { cartAPI } from '../../api/client';
 
 const Navbar = () => {
   const { user, logout, isAuthenticated } = useAuth();
   const navigate = useNavigate();
   const [searchQuery, setSearchQuery] = useState('');
+  const [cartCount, setCartCount] = useState(0);
+
+  useEffect(() => {
+    if (isAuthenticated) {
+      loadCartCount();
+    }
+  }, [isAuthenticated]);
+
+  const loadCartCount = async () => {
+    try {
+      const res = await cartAPI.get();
+      const totalItems = res.data.items.reduce((sum, item) => sum + item.quantity, 0);
+      setCartCount(totalItems);
+    } catch (error) {
+      console.error('Error loading cart count:', error);
+    }
+  };
+
+  // Expose method to refresh cart count
+  window.refreshCartCount = loadCartCount;
 
   const handleSearch = (e) => {
     e.preventDefault();
@@ -53,10 +74,15 @@ const Navbar = () => {
                 <>
                   <Link
                     to="/cart"
-                    className="p-2 text-gray-700 hover:text-green-600 transition-colors"
+                    className="relative p-2 text-gray-700 hover:text-green-600 transition-colors"
                     data-testid="cart-button"
                   >
                     <ShoppingCart className="h-6 w-6" />
+                    {cartCount > 0 && (
+                      <span className="absolute -top-1 -right-1 bg-green-600 text-white text-xs font-bold rounded-full h-5 w-5 flex items-center justify-center">
+                        {cartCount}
+                      </span>
+                    )}
                   </Link>
                   <Link
                     to="/orders"
@@ -130,10 +156,15 @@ const Navbar = () => {
             </Link>
             <Link
               to="/cart"
-              className="flex flex-col items-center justify-center text-gray-700 hover:text-green-600"
+              className="flex flex-col items-center justify-center text-gray-700 hover:text-green-600 relative"
               data-testid="mobile-cart-button"
             >
               <ShoppingCart className="h-6 w-6" />
+              {cartCount > 0 && (
+                <span className="absolute -top-1 -right-1 bg-green-600 text-white text-xs font-bold rounded-full h-5 w-5 flex items-center justify-center">
+                  {cartCount}
+                </span>
+              )}
               <span className="text-xs mt-1">Cart</span>
             </Link>
             <Link

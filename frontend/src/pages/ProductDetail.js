@@ -63,7 +63,13 @@ const ProductDetail = () => {
     try {
       await cartAPI.add({ product_id: product.id, quantity });
       setShowSuccess(true);
-      setTimeout(() => setShowSuccess(false), 3000);
+      
+      // Refresh cart count in navbar
+      if (window.refreshCartCount) {
+        window.refreshCartCount();
+      }
+      
+      setTimeout(() => setShowSuccess(false), 5000);
     } catch (error) {
       console.error('Error adding to cart:', error);
       setError(error.response?.data?.detail || 'Failed to add to cart');
@@ -125,10 +131,18 @@ const ProductDetail = () => {
 
         {/* Success Message */}
         {showSuccess && (
-          <div className="mb-6 bg-green-50 border border-green-200 rounded-lg p-4 flex items-center space-x-3" data-testid="success-message">
-            <Check className="h-5 w-5 text-green-600" />
-            <span className="text-green-800 font-medium">Added to cart successfully!</span>
-            <Link to="/cart" className="ml-auto text-green-600 hover:text-green-700 font-medium">
+          <div className="fixed top-20 right-4 z-50 bg-green-600 text-white rounded-lg shadow-2xl p-4 flex items-center space-x-3 animate-slide-in" data-testid="success-message">
+            <div className="flex-shrink-0 w-10 h-10 bg-white rounded-full flex items-center justify-center">
+              <Check className="h-6 w-6 text-green-600" />
+            </div>
+            <div className="flex-1">
+              <p className="font-semibold">Added to cart!</p>
+              <p className="text-sm text-green-100">{quantity} {quantity > 1 ? 'items' : 'item'} added</p>
+            </div>
+            <Link 
+              to="/cart" 
+              className="px-4 py-2 bg-white text-green-600 rounded-lg hover:bg-green-50 transition-colors font-medium text-sm"
+            >
               View Cart
             </Link>
           </div>
