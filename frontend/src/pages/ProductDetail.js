@@ -21,6 +21,8 @@ const ProductDetail = () => {
   const [error, setError] = useState('');
 
   useEffect(() => {
+    // Scroll to top when page loads
+    window.scrollTo(0, 0);
     loadProduct();
   }, [id]);
 

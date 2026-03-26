@@ -12,6 +12,9 @@ const OrderSuccess = () => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
+    // Scroll to top when page loads
+    window.scrollTo(0, 0);
+    
     if (!isAuthenticated) {
       navigate('/auth');
       return;

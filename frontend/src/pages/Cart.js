@@ -12,6 +12,9 @@ const Cart = () => {
   const [updating, setUpdating] = useState(null);
 
   useEffect(() => {
+    // Scroll to top when page loads
+    window.scrollTo(0, 0);
+    
     if (isAuthenticated) {
       loadCart();
     } else {
